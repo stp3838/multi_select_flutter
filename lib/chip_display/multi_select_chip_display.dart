@@ -119,15 +119,14 @@ class MultiSelectChipDisplay<V> extends StatelessWidget {
           : Wrap(
               children: items != null
                   ? items!.map((item) => _buildItem(item!, context)).toList()
-                  : <Widget>[
-                      Container(),
-                    ],
+                  : <Widget>[Container()],
             ),
     );
   }
 
   Widget _buildItem(MultiSelectItem<V> item, BuildContext context) {
     return Container(
+      color: Colors.red,
       padding: const EdgeInsets.all(2.0),
       child: ChoiceChip(
         shape: shape as OutlinedBorder?,
@@ -148,13 +147,13 @@ class MultiSelectChipDisplay<V> extends StatelessWidget {
             style: TextStyle(
               color: colorator != null && colorator!(item.value) != null
                   ? textStyle != null
-                      ? textStyle!.color ?? colorator!(item.value)
-                      : colorator!(item.value)
+                        ? textStyle!.color ?? colorator!(item.value)
+                        : colorator!(item.value)
                   : textStyle != null && textStyle!.color != null
-                      ? textStyle!.color
-                      : chipColor != null
-                          ? chipColor!.withOpacity(1)
-                          : null,
+                  ? textStyle!.color
+                  : chipColor != null
+                  ? chipColor!.withOpacity(1)
+                  : null,
               fontSize: textStyle != null ? textStyle!.fontSize : null,
             ),
           ),
@@ -163,12 +162,14 @@ class MultiSelectChipDisplay<V> extends StatelessWidget {
         selectedColor: colorator != null && colorator!(item.value) != null
             ? colorator!(item.value)
             : chipColor != null
-                ? chipColor
-                : Theme.of(context).primaryColor.withOpacity(0.33),
-        onSelected: disabled == true ? null : (_) {
-          if (onTap != null) onTap!(item.value);
-        },
+            ? chipColor
+            : Theme.of(context).primaryColor.withOpacity(0.33),
+        onSelected: disabled == true
+            ? null
+            : (_) {
+                if (onTap != null) onTap!(item.value);
+              },
       ),
     );
   }
-} 
+}
